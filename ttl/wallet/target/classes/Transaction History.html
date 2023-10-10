@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction History</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div id="transaction-history">
+    <!-- Display transactions here -->
+</div>
+
+<script>
+    $(document).ready(function() {
+        $.get("/transactions?userId=1", function(data) {
+            var transactionHistory = $("#transaction-history");
+            transactionHistory.empty();
+
+            data.forEach(function(transaction) {
+                transactionHistory.append("<p>Transaction ID: " + transaction.transactionId + "</p>");
+                transactionHistory.append("<p>Type: " + transaction.transactionType + "</p>");
+                transactionHistory.append("<p>Amount: " + transaction.amount + "</p>");
+                transactionHistory.append("<p>Transaction Time: " + transaction.transactionTime + "</p>");
+                transactionHistory.append("<hr>");
+            });
+        });
+    });
+</script>
+</body>
+</html>
